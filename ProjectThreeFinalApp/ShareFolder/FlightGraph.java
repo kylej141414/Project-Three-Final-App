@@ -106,4 +106,14 @@ public class FlightGraph implements BackendInterface {
     }
   }
 
+  public List<String> getAirportsList() {
+    return airportsList;
+  }
+
+
+  public List<Airline> getAirlinesList() {
+    return airlinesList;
+  }
+
 }
+
