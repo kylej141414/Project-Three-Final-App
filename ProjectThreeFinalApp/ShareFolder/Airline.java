@@ -13,11 +13,10 @@ public class Airline {
   public String getEnd() {
       return this.end;
   }
-  public double getDistance() {
+  public int getDistance() {
       return this.distance;
   }
-  public int compareTo(Airline newAirline) {
-    // TODO Auto-generated method stub
-    return 0;
+  public String toString() {
+      return start + " --> " + end + " Distance: " + distance;
   }
 }
