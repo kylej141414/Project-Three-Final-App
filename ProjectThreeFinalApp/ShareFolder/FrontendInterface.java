@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.util.List;
 import java.util.Scanner;
 
@@ -42,9 +43,10 @@ public class FrontendInterface {
     try {
       // final Backend movies = new Backend(args);
       // FileReader read = new FileReader("/Users/jacksoncamp/Downloads/events.csv");
-      final FlightGraph flights = new FlightGraph(args);
+      FileReader read = new FileReader("/Users/kylesung/Downloads/connections.csv");
+      final FlightGraph flights = new FlightGraph(read);
       FrontendInterface frontend = new FrontendInterface(flights);
-
+      
       frontend.baseMenu();
     } catch (FileNotFoundException e) {
       e.printStackTrace();
@@ -93,8 +95,8 @@ public class FrontendInterface {
         System.out.println("Thanks for using the Flight Scheduler!");
         return;
       } else {
-        System.out.println();
         System.out.println("You did not enter a valid input");
+        System.out.println();
         baseMenuDisplay();
       }
     }
