@@ -13,15 +13,15 @@ public class FlightGraph implements BackendInterface {
 
 
   public FlightGraph(String[] args) throws FileNotFoundException {
-    this(new FileReader(args[0]));
+    this(new FileReader("/Users/jacksoncamp/Downloads/connections.csv"), new FileReader("/Users/jacksoncamp/Downloads/connections.csv"));
   }
 
-  public FlightGraph(Reader inputReader) {
+  public FlightGraph(Reader inputReader, Reader inputReader2) {
     AirlineReader reader = new AirlineReader();
-
+    AirlineReader reader2 = new AirlineReader();
     try {
       airportsList = reader.getAllAirports(inputReader);
-      airlinesList = reader.getAllAirlines(inputReader);
+      airlinesList = reader2.getAllAirlines(inputReader2);
     } catch (DataFormatException e) {
       e.printStackTrace();
     } catch (IOException e) {
@@ -116,4 +116,3 @@ public class FlightGraph implements BackendInterface {
   }
 
 }
-
