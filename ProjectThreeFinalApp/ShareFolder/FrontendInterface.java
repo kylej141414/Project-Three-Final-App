@@ -8,10 +8,8 @@
 // Notes to Grader:
 
 import java.io.FileNotFoundException;
-import java.text.DecimalFormat;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.List;
 import java.util.Scanner;
 
@@ -43,10 +41,10 @@ public class FrontendInterface {
     try {
       // final Backend movies = new Backend(args);
       // FileReader read = new FileReader("/Users/jacksoncamp/Downloads/events.csv");
-      FileReader read = new FileReader("/Users/kylesung/Downloads/connections.csv");
-      final FlightGraph flights = new FlightGraph(read);
+      // FileReader read = new FileReader("/Users/kylesung/Downloads/connections.csv");
+      final FlightGraph flights = new FlightGraph(args);
       FrontendInterface frontend = new FrontendInterface(flights);
-      
+
       frontend.baseMenu();
     } catch (FileNotFoundException e) {
       e.printStackTrace();
@@ -72,23 +70,38 @@ public class FrontendInterface {
   public void baseMenuDisplay() {
     String navigation;
 
-    System.out.println("Main Mode:");
+    System.out.println("Main Menu:");
 
-    System.out.println("Enter 'a' to add airport");
-    System.out.println("Enter 'r' to remove airport");
-    System.out.println("Enter 'x' to remove airline");
-    System.out.println("Enter 'c' to calculate shortest route");
-    System.out.println("Enter 'q' to quit");
+    System.out.println("[z] to view all airlines");
+    System.out.println("[k] to view all airports");
+    System.out.println("[a] to add airport");
+    System.out.println("[e] to add an airline");
+    System.out.println("[r] to remove airport");
+    System.out.println("[x] to remove airline");
+    System.out.println("[c] to calculate shortest route");
+    System.out.println("[q] to quit");
     if (scanner.hasNext()) {
       navigation = scanner.nextLine();
       if (navigation.equals("a")) {
         System.out.println();
         newAirportMode(flights);
+      } else if (navigation.equals("e")) {
+        System.out.println();
+        addAirline(flights);
+      } else if (navigation.equals("k")) {
+        System.out.println();
+        displayAirports(flights.getAirportsList(), flights);
+      } else if (navigation.equals("z")) {
+        System.out.println();
+        displayAirlines(flights.getAirlinesList(), flights);
       } else if (navigation.equals("r")) {
+        System.out.println();
         removeAirportMode(flights);
       } else if (navigation.equals("x")) {
+        System.out.println();
         removeAirline(flights);
       } else if (navigation.equals("c")) {
+        System.out.println();
         calcRouteMode(flights);
       } else if (navigation.equals("q")) {
         System.out.println();
@@ -97,9 +110,232 @@ public class FrontendInterface {
       } else {
         System.out.println("You did not enter a valid input");
         System.out.println();
+
         baseMenuDisplay();
       }
     }
+  }
+
+  /**
+   * This method displays the output for a certain list of events. It allows the user to parse
+   * through multiple pages of events if needed
+   * 
+   * @param list   List<Airline> the list of events from a specific category
+   * @param airlines FlightGraph airlines is the BackendInterface that was created in the main method
+   */
+  public void displayAirlines(List<Airline> list, FlightGraph airlines) {
+    if (list.isEmpty()) {
+      System.out.println("There are no events with this criteria");
+      return;
+    }
+
+    int numPages;
+    int previousEventCount;
+    // gets number of pages
+    if (list.size() % 5 == 0) {
+      // System.out.println(list.size());
+      numPages = list.size() / 5;
+      // System.out.println(numPages);
+    } else {
+      numPages = list.size() / 5;
+      numPages++;
+    }
+    System.out.println("Welcome to the Airline Viewer!");
+    System.out.println("Please enter a page number to view the airlines");
+    String pageNums = "Page ";
+    for (int u = 1; u <= numPages; u++) {
+      pageNums = pageNums + " " + u;
+    }
+    System.out.println(pageNums);
+    int selectedPage;
+
+
+    int reply = scanner.nextInt(); // page number user wants to go to
+    // selectedPage = Integer.valueOf(reply);
+    System.out.println(numPages);
+    displayAirlinesHelper(list, flights, reply, numPages);
+  }
+
+  /**
+   * This method displays the output for a certain list of events. It allows the user to parse
+   * through multiple pages of events if needed
+   * 
+   * @param list   List<String> the list of events from a specific category
+   * @param airlines FlightGraph airlines is the BackendInterface that was created in the main method
+   */
+  public void displayAirports(List<String> list, FlightGraph airlines) {
+    if (list.isEmpty()) {
+      System.out.println("There are no events with this criteria");
+      return;
+    }
+
+    int numPages;
+    int previousEventCount;
+    // gets number of pages
+    if (list.size() % 5 == 0) {
+      // System.out.println(list.size());
+      numPages = list.size() / 5;
+      // System.out.println(numPages);
+    } else {
+      numPages = list.size() / 5;
+      numPages++;
+    }
+    System.out.println("Welcome to the Airports Viewer!");
+    System.out.println("Please enter a page number to view the airports");
+    String pageNums = "Page ";
+    for (int u = 1; u <= numPages; u++) {
+      pageNums = pageNums + " " + u;
+    }
+    System.out.println(pageNums);
+    int selectedPage;
+
+
+    int reply = scanner.nextInt(); // page number user wants to go to
+    // selectedPage = Integer.valueOf(reply);
+    System.out.println(numPages);
+    displayAirportsHelper(list, flights, reply, numPages);
+  }
+
+  /**
+   * This method is a helper method for the displayAirlines method. It handles the functionality of
+   * the user flipping through multiple pages of airlines
+   * 
+   * @param list     List<Airlines> the list of Events we are flipping through
+   * @param airlines FlightGraph airlines is the BackendInterface that was created in the main method
+   * @param page     the specific page that we are viewing the airlines for
+   * @param numPages the total number of pages in the airlines list
+   */
+  public void displayAirlinesHelper(List<Airline> list, FlightGraph airlines, int page,
+      int numPages) {
+
+    int previousEventCount = (page - 1) * 5;
+
+    int numElementsOnLastPage = list.size() % 5;
+    System.out.println();
+    System.out.println("Page " + page + ":");
+
+    int numElementsOnFirstPage;
+    if (list.size() < 5) {
+      numElementsOnFirstPage = list.size();
+    } else {
+      numElementsOnFirstPage = 5;
+    }
+
+    // if page selected if first page
+    if (page == 1) {
+      for (int i = 0; i < numElementsOnFirstPage; i++) {
+        System.out.println("Airline " + (i + 1) + ": " + airlines.getAirlinesList().get(i));
+      }
+    }
+
+    // if page selected is the last page
+    else if (numPages == page) {
+      for (int h = 0; h < numElementsOnLastPage; h++) {
+        int num = previousEventCount + h;
+        System.out.println("Airline " + (h + 1) + ": " + airlines.getAirlinesList().get(num));
+      }
+    }
+
+    else {
+      for (int j = 0; j < 5; j++) {
+        int num = previousEventCount + j;
+        System.out.println("Airline " + (j + 1) + ": " + airlines.getAirlinesList().get(num));
+      }
+    }
+
+    System.out.println();
+    System.out.println("Enter 'x' to return to base menu");
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("Enter another page # to view another page of airlines");
+
+    if (scanner.hasNext()) {
+      String reply = scanner.nextLine();
+
+      if (reply.equals("x")) {
+        System.out.println();
+        baseMenu();
+        return;
+      }
+      int newPage = Integer.valueOf(reply);
+      displayAirlinesHelper(list, flights, newPage, numPages);
+    }
+    String pageNums = "Page ";
+    for (int u = 1; u <= numPages; u++) {
+      pageNums = pageNums + " " + u;
+    }
+    System.out.println(pageNums);
+
+  }
+
+  /**
+   * This method is a helper method for the displayEvents method. It handles the functionality of
+   * the user flipping through multiple pages of events
+   * 
+   * @param list     List<String> the list of airports we are flipping through
+   * @param airports FlightGraph airports is the BackendInterface that was created in the main method
+   * @param page     the specific page that we are viewing the airports for
+   * @param numPages the total number of pages in the airports list
+   */
+  public void displayAirportsHelper(List<String> list, FlightGraph airports, int page,
+      int numPages) {
+
+    int previousEventCount = (page - 1) * 5;
+
+    int numElementsOnLastPage = list.size() % 5;
+    System.out.println();
+    System.out.println("Page " + page + ":");
+
+    int numElementsOnFirstPage;
+    if (list.size() < 5) {
+      numElementsOnFirstPage = list.size();
+    } else {
+      numElementsOnFirstPage = 5;
+    }
+
+    // if page selected if first page
+    if (page == 1) {
+      for (int i = 0; i < numElementsOnFirstPage; i++) {
+        System.out.println("Airport " + (i + 1) + ": " + airports.getAirportsList().get(i));
+      }
+    }
+
+    // if page selected is the last page
+    else if (numPages == page) {
+      for (int h = 0; h < numElementsOnLastPage; h++) {
+        int num = previousEventCount + h;
+        System.out.println("Airport " + (h + 1) + ": " + airports.getAirportsList().get(num));
+      }
+    }
+
+    else {
+      for (int j = 0; j < 5; j++) {
+        int num = previousEventCount + j;
+        System.out.println("Airport " + (j + 1) + ": " + airports.getAirportsList().get(num));
+      }
+    }
+
+    System.out.println();
+    System.out.println("Enter 'x' to return to base menu");
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("Enter another page # to view another page of airports");
+
+    if (scanner.hasNext()) {
+      String reply = scanner.nextLine();
+
+      if (reply.equals("x")) {
+        System.out.println();
+        baseMenu();
+        return;
+      }
+      int newPage = Integer.valueOf(reply);
+      displayAirportsHelper(list, flights, newPage, numPages);
+    }
+    String pageNums = "Page ";
+    for (int u = 1; u <= numPages; u++) {
+      pageNums = pageNums + " " + u;
+    }
+    System.out.println(pageNums);
+
   }
 
   public void addAirline(FlightGraph airports) {
@@ -109,6 +345,10 @@ public class FrontendInterface {
     String userInput4 = "";
     boolean validOrigin = false;
     boolean validDestination = false;
+    System.out.println("Welcome to Airline Insert Mode!");
+    System.out.println();
+    System.out.println("Current Airports: ");
+    System.out.println(showAirports(flights));
     System.out.println("Please input the name of origin airport you are connecting to:");
     userInput = scanner.nextLine();
     System.out.println("Please input the name of destination airport you are connecting to:");
@@ -141,8 +381,9 @@ public class FrontendInterface {
       if (userInput4.equals("yes")) {
         System.out.println();
         addAirline(flights);
-      } else if (userInput4.equals("no")) { // breaks out without going home if no
+      } else if (userInput4.equals("no")) {
         System.out.println();
+        baseMenuDisplay();
       } else {
         System.out.println();
         System.out.println("Please enter either 'yes' or 'no'.");
@@ -157,6 +398,9 @@ public class FrontendInterface {
     boolean validOrigin = false;
     boolean validDestination = false;
     System.out.println("Welcome to Airline Removal Mode!");
+    System.out.println();
+    System.out.println("Current Airports: ");
+    System.out.println(showAirports(flights));
     System.out.println("Please input the name of origin airport you are removing:");
     userInput = scanner.nextLine();
     System.out.println("Please input the name of destination airport you are removing:");
@@ -186,8 +430,9 @@ public class FrontendInterface {
       if (userInput4.equals("yes")) {
         System.out.println();
         removeAirline(flights);
-      } else if (userInput4.equals("no")) { // breaks out without going home if no
+      } else if (userInput4.equals("no")) {
         System.out.println();
+        baseMenuDisplay();
       } else {
         System.out.println();
         System.out.println("Please enter either 'yes' or 'no'.");
@@ -200,28 +445,14 @@ public class FrontendInterface {
     String userInput2 = "";
     System.out.println("Welcome to New Airport Insert Mode!");
     System.out.println();
-    System.out.println("Current Airports: " + airports.getAirportsList().toString());
-    System.out.println();
+    System.out.println("Current Airports: ");
+    System.out.println(showAirports(flights));
 
     System.out.println("Please input the name of the Airport:");
     userInput = scanner.nextLine();
     airports.addAirport(userInput);
     System.out.println();
     String input = "";
-    System.out
-        .println("Would you like to add an airline connection to " + userInput + "? (yes/no)");
-    while (!input.equals("yes") && !input.equals("no")) {
-      input = scanner.nextLine();
-      if (input.equals("yes")) {
-        System.out.println();
-        addAirline(flights); // calls function that can repeated add multiple connections
-      } else if (input.equals("no")) {
-        System.out.println();
-      } else {
-        System.out.println();
-        System.out.println("Please enter a 'yes' or 'no'.");
-      }
-    }
     System.out.println("Successfully added airport " + userInput + " to the database!");
     System.out.println();
 
@@ -241,6 +472,14 @@ public class FrontendInterface {
     }
   }
 
+  public String showAirports(FlightGraph airports) {
+    String toReturn = "";
+    for(int i = 0; i < airports.getAirportsList().size(); i++) {
+      toReturn += (i+1) + "." + " " + airports.getAirportsList().get(i) + "\n";
+    }
+    return toReturn;
+  }
+  
   public void calcRouteMode(FlightGraph airlines) {
     String userInput;
     String userInput2;
@@ -248,10 +487,9 @@ public class FrontendInterface {
     boolean validDestination = false;
     System.out.println("Welcome to the Shortest Route Calculator!");
     System.out.println();
-    System.out.println("Current Airlines: " + airlines.getAirlinesList().toString());
-    System.out.println();
-    System.out.println("Current Airports: " + airlines.getAirportsList().toString());
-    System.out.println();
+    System.out.println("Current Airports: ");
+    //System.out.println(airlines.getAirportsList().toString());
+    System.out.println(showAirports(flights));
 
     System.out.println("Please input the name of origin airport:");
     userInput = scanner.nextLine();
@@ -300,8 +538,8 @@ public class FrontendInterface {
     boolean validAirport = false;
     System.out.println("Welcome to Airport Removal Mode!");
     System.out.println();
-    System.out.println("Current Airports: " + airlines.getAirportsList().toString());
-    System.out.println();
+    System.out.println("Current Airports: ");
+    System.out.println(showAirports(flights));
 
     System.out.println("Please input the name of the Airport:");
     System.out.println();
