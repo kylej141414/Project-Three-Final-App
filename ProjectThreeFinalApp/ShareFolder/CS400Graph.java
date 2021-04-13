@@ -12,6 +12,13 @@ import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.NoSuchElementException;
 
+/**
+ * This class implements a graph with Dijkstras's algorithm
+ * 
+ * @author jacksoncamp
+ *
+ * @param <T>
+ */
 public class CS400Graph<T> implements GraphADT<T> {
 
   /**
@@ -425,3 +432,4 @@ public class CS400Graph<T> implements GraphADT<T> {
 
 
 }
+
