@@ -429,7 +429,5 @@ public class CS400Graph<T> implements GraphADT<T> {
   public int getPathCost(T start, T end) {
     return dijkstrasShortestPath(start, end).distance;
   }
-
-
 }
 
