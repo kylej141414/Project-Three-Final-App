@@ -2,7 +2,7 @@ run: compile
 
 #compile should compile the code for the project by running the frontend
 compile: FrontendInterface.class FlightGraph.class AirlineReader.class Airline.clas 
-	java FrontendInterface events.csv
+	java FrontendInterface
 
 FrontendInterface.class: FrontendInterface.java
 	javac FrontendInterface.java
