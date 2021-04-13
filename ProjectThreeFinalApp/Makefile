@@ -26,10 +26,10 @@ TestFrontend.class: TestFrontend.java
 	javac -cp .:junit5.jar TestFrontend.java
 
 #this tests the backend and backend tests
-testBackend: BackendDeveloperTests.class
-	java -jar junit5.jar -cp . --scan-classpath -n BackendDeveloperTests
-BackendDeveloperTests.class: BackendDeveloperTests.java
-	javac -cp .:junit5.jar BackendDeveloperTests.java
+testBackend: BackEndDeveloperTests.class
+	java -jar junit5.jar -cp . --scan-classpath -n BackEndDeveloperTests
+BackEndDeveloperTests.class: BackEndDeveloperTests.java
+	javac -cp .:junit5.jar BackEndDeveloperTests.java
 
 #this tests the data wrangler and data wrangler tests
 testData: DataWranglerTests.class
