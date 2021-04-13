@@ -1,16 +1,29 @@
 IntegrationManager README for Project Three(CS400 @ UW Madison)
 ==============================================================
 
-Name of IntegrationManager: <enter your complete name here>
-@wisc.edu Email of IntegrationManager: <enter your @wisc.edu email address here>
-Group: <enter your two letter group name here>
-Team: <enter your team color: red, blue, or purple, here>
+Name of IntegrationManager: Kyle Johnson
+@wisc.edu Email of IntegrationManager: kajohnson46@wisc.edu
+Group: JG
+Team: red
 
 Complete List of Files:
 -----------------------
-<List all files that are a part of this project along with the name of the team
- member(s) who were most responsible for implementing the computation within
- each of these files.>
+Makefile - Kyle Johnson
+DataWrangler_README.txt - Brendan Chang
+BackEndDeveloper_README.txt - Jackson Camp
+FrontEndDeveloper_README.txt - Kyle Sung
+IntegrationManager_README.txt - Kyle Johnson
+connections.csv - Brendan Chang
+Airline.java - Brendan Chang
+AirlineReaderInterface.java - Brendan Chang
+AirlineReader.java - Brendan Chang
+DataWranglerTests.java - Brendan Chang
+CS400Graph.java - Jackson Camp
+BackEndDeveloperTests.java - Jackson Camp
+BackendInterface - Jackson Camp
+FlightGraph.java - Jackson Camp
+FrontendInterface.java - Kyle Sung
+FrontendTest.java - Kyle Sung
 
 Instructions to Build, Run and Test your Project:
 -------------------------------------------------
