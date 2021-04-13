@@ -1,19 +1,42 @@
-run:
-	@echo "FIXME: *make run* or just *make* should be the default target which compiles (when needed) and executes your code."
+run: compile
 
-compile:
-	@echo "FIXME: *make compile* should compile the code for your project"
+#compile should compile the code for the project by running the frontend
+compile: Frontend.class FlightGraph.class AirlineReader.class Airline.clas 
+	java FrontendInterface events.csv
 
+Frontend.class: Frontend.java
+	javac Frontend.java
+	
+FlightGraph.class: FlightGraph.java
+	javac FlightGraph.java
+	
+AirlineReader.class: AirlineReader.java
+	javac AirlineReader.java
+	
+Event.class: Airline.java
+	javac Airline.java
+
+#compiles the TEST CASES
 test: testData testBackend testFrontend
 
-testFrontend:
-	@echo "FIXME: *make testFrontend* should compile (when needed) and run all your team's tests for this application"
+#this tests the frontend and frontend tests
+testFrontend: TestFrontend.class
+	java -jar junit5.jar -cp . --scan-classpath -n TestFrontend
+TestFrontend.class: TestFrontend.java
+	javac -cp .:junit5.jar TestFrontend.java
 
-testBackend:
-	@echo "FIXME: *make testFrontend* should compile (when needed) and run all your team's tests for this application"
+#this tests the backend and backend tests
+testBackend: BackEndDeveloperTests.class
+	java -jar junit5.jar -cp . --scan-classpath -n BackEndDeveloperTests
+BackEndDeveloperTests.class: BackEndDeveloperTests.java
+	javac -cp .:junit5.jar BackEndDeveloperTests.java
 
-testData:
-	@echo "FIXME: *make testFrontend* should compile (when needed) and run all your team's tests for this application"
+#this tests the data wrangler and data wrangler tests
+testData: DataWranglerTests.class
+	java -jar junit5.jar -cp . --scan-classpath -n DataWranglerTests
+DataWranglerTests.class: DataWranglerTests.java
+	javac -cp .:junit5.jar DataWranglerTests.java
 
+#cleans the code
 clean:
 	$(RM) *.class
