@@ -13,7 +13,7 @@ FlightGraph.class: FlightGraph.java
 AirlineReader.class: AirlineReader.java
 	javac AirlineReader.java
 	
-Event.class: Airline.java
+Airline.class: Airline.java
 	javac Airline.java
 
 #compiles the TEST CASES
