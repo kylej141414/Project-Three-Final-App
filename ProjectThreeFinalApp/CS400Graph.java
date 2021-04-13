@@ -1,24 +1,18 @@
-// --== CS400 File Header Information ==--
-// Name: Jackson Camp
-// Email: jecamp@wisc.edu
-// Team: JG
-// TA: Xinyi
-// Lecturer: Gary Dahl
-// Notes to Grader: <optional extra notes>
-
 import java.util.Hashtable;
 import java.util.List;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.NoSuchElementException;
 
-/**
- * This class implements a graph with Dijkstras's algorithm
- * 
- * @author jacksoncamp
- *
- * @param <T>
- */
+// --== CS400 File Header Information ==--
+// Name: Kyle Johsnson
+// Email: kajohnson46@wisc.edu
+// Team: JG
+// TA: Xinyi Liu
+// Lecturer: Gary Dahl
+// Notes to Grader: Happy Easter!
+
+
 public class CS400Graph<T> implements GraphADT<T> {
 
   /**
@@ -98,7 +92,6 @@ public class CS400Graph<T> implements GraphADT<T> {
     // finally remove the vertex and all edges contained within it
     return vertices.remove(data) != null;
   }
-
 
   /**
    * Insert a new directed edge with a positive edge weight into the graph.
@@ -288,18 +281,15 @@ public class CS400Graph<T> implements GraphADT<T> {
      * @param extendBy is the edge the copied path is extended by
      */
     public Path(Path copyPath, Edge extendBy) {
-      // TODO: Implement this constructor in Step 5.
-      
-      this.start = copyPath.start;
-      this.distance = copyPath.distance + extendBy.weight;
-      this.end = extendBy.target;
+      // Makes new path with edge added on
+      start = copyPath.start;
+      distance = copyPath.distance + extendBy.weight;
+      end = extendBy.target;
+      // Deep copy of list
+      dataSequence = new LinkedList<>();
+      dataSequence.addAll(copyPath.dataSequence);
+      dataSequence.add(extendBy.target.data);
 
-      this.dataSequence = new LinkedList<>();
-      
-      for (T a: copyPath.dataSequence) {
-        this.dataSequence.add(a);
-      }
-      this.dataSequence.add(extendBy.target.data);    
     }
 
     /**
@@ -334,70 +324,33 @@ public class CS400Graph<T> implements GraphADT<T> {
    *                                vertex containing start or end can be found
    */
   protected Path dijkstrasShortestPath(T start, T end) {
-    // Make sure that you keep track of which vertices you have already found shortest paths to,
-    // so that you do not continue to explore longer paths to those nodes.
-
-    //check if the hash table actually contains the start and end nodes
-    if(!vertices.containsKey(start)) {
-      throw new NoSuchElementException("Failed: Starting vertex not in graph");
+    // First checks for valid entries
+    if (vertices.get(start) == null || vertices.get(end) == null) {
+      throw new NoSuchElementException("Invalid Entries");
     }
-    if(!vertices.containsKey(end)) {
-      throw new NoSuchElementException("Failed: Ending vertex not in graph");
-    }
-    
-    //check if start and end are the same
-    if(start == end) {
-      return new Path(vertices.get(start));
-    }
-    
-    // priority queue
-    PriorityQueue<Path> frontier = new PriorityQueue<Path>();
-    LinkedList<Path> pathsFound = new LinkedList<>();
-
-    //Adds start vertex to the frontier
-    frontier.add(new Path(vertices.get(start)));
-
-    Path current;
-    Path n;
-
-    Path shortestPathStartToEnd = null;
-
-    while (!frontier.isEmpty()) {
-      // Pop cheapest path from frontier - this is now current path/node we will explore
-      current = frontier.poll();
-
-      // Found shortest path for this vertex - Add current to pathsFound list
-      pathsFound.add(current);
-      
-      //If current equals shortest path, stop the loop
-      if(current.equals(shortestPathStartToEnd)) {
-        break;
+    PriorityQueue<Path> queue = new PriorityQueue<Path>();
+    List<Vertex> verticesFound = new LinkedList<Vertex>();
+    Path startPath = new Path(vertices.get(start));
+    // Queue starts with initial point
+    queue.add(startPath);
+    // While there are paths in queue, explore them
+    while (!queue.isEmpty()) {
+      // Remove the top one, found shortest path to the vertex
+      Path top = queue.peek();
+      queue.remove(top);
+      verticesFound.add(top.end);
+      // Check if path found to vertex was end
+      if (top.end.data.equals(end)) {
+        return top;
       }
-      
-      // loop through all of current's adjacent vertexes
-      for(Edge e: current.end.edgesLeaving) {
-        n = new Path(current, e);
-
-        // if the new path isn't in pathsFound list then
-        if (!pathsFound.contains(n)) {
-          frontier.add(n);
-        }
-        
-        
-        //if path reaches "end" vertex check if its the shortest path
-        if(n.end.data.equals(end)) {
-          if(shortestPathStartToEnd == null || shortestPathStartToEnd.compareTo(n) > 0) {
-            shortestPathStartToEnd = n;
-          }
+      // Adds all vertices connected as long as they are not already found
+      for (int i = 0; i < top.end.edgesLeaving.size(); i++) {
+        if (!verticesFound.contains(top.end.edgesLeaving.get(i).target)) {
+          queue.add(new Path(top, top.end.edgesLeaving.get(i)));
         }
       }
     }
-    
-    //Failed to find any path from the start to end vertices
-    if(shortestPathStartToEnd == null) {
-      throw new NoSuchElementException("Failed to find any path from the start to end vertices");
-    }
-    return shortestPathStartToEnd; 
+    throw new NoSuchElementException("No path found");
   }
 
   /**
@@ -429,5 +382,5 @@ public class CS400Graph<T> implements GraphADT<T> {
   public int getPathCost(T start, T end) {
     return dijkstrasShortestPath(start, end).distance;
   }
-}
 
+}
