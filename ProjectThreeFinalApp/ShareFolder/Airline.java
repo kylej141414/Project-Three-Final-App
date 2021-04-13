@@ -1,5 +1,3 @@
-package FlightScheduler;
-
 // --== CS400 File Header Information ==--
 // Name: Brendan Chang
 // Email: bchang32@wisc.edu
