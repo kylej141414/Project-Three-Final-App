@@ -35,8 +35,8 @@ public class FlightGraph implements BackendInterface {
    * @throws FileNotFoundException thrown if file not found
    */
   public FlightGraph(String[] args) throws FileNotFoundException {
-    this(new FileReader("/Users/jacksoncamp/Downloads/connections (1).csv"),
-        new FileReader("/Users/jacksoncamp/Downloads/connections (1).csv"));
+    this(new FileReader("connections.csv"),
+        new FileReader("connections.csv"));
   }
 
   /**
