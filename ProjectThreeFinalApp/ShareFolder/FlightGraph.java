@@ -1,9 +1,19 @@
+// --== CS400 File Header Information ==--
+// Name: Jackson Camp
+// Email: jecamp@wisc.edu
+// Team: Red
+// Role: Front End Developer
+// TA: Xinyi Ju
+// Lecturer: Florian Heimerl
+// Notes to Grader:
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
 import java.util.zip.DataFormatException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 public class FlightGraph implements BackendInterface {
@@ -13,7 +23,7 @@ public class FlightGraph implements BackendInterface {
 
 
   public FlightGraph(String[] args) throws FileNotFoundException {
-    this(new FileReader("/Users/kylesung/Downloads/connections.csv"), new FileReader("/Users/kylesung/Downloads/connections.csv"));
+    this(new FileReader("/Users/jacksoncamp/Downloads/connections (1).csv"), new FileReader("/Users/jacksoncamp/Downloads/connections (1).csv"));
   }
 
   public FlightGraph(Reader inputReader, Reader inputReader2) {
@@ -40,7 +50,7 @@ public class FlightGraph implements BackendInterface {
 
     // add all airline edges to graph
     for (Airline airline : airlinesList) {
-      airportsGraph.insertEdge(airline.getStart(),airline.getEnd(),(int)airline.getDistance());     
+      airportsGraph.insertEdge(airline.getStart(),airline.getEnd(),airline.getDistance());    
     }
   }
 
@@ -111,8 +121,14 @@ public class FlightGraph implements BackendInterface {
   }
 
 
-  public List<Airline> getAirlinesList() {
-    return airlinesList;
+  public List<String> getAirlinesList() {
+    List<String> list = new ArrayList<String>();
+    
+    for(Airline a : airlinesList) {
+      list.add(a.toString());
+    }
+    return list;
   }
 
 }
+
