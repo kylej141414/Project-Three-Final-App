@@ -4,15 +4,30 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.zip.DataFormatException;
 
-public class AirlineReader implements AirlineReaderInterface {
+// --== CS400 File Header Information ==--
+// Name: Brendan Chang
+// Email: bchang32@wisc.edu
+// Team: Red
+// Role: Front End Developer
+// TA: Xinyi Ju
+// Lecturer: Florian Heimerl
+// Notes to Grader:
 
+public class AirlineReader implements AirlineReaderInterface {
+  /**
+   * This method returns a String Arraylist of all the airports in the graph
+   * 
+   * @author Brendan Chang
+   * @param inputFileReader is the file we are reading through (connections.csv)
+   */
   @Override
-  public ArrayList<String> getAllAirports(Reader inputFileReader) throws IOException, DataFormatException{
-    ArrayList<String> airports =  new ArrayList<String>();
+  public ArrayList<String> getAllAirports(Reader inputFileReader)
+      throws IOException, DataFormatException {
+    ArrayList<String> airports = new ArrayList<String>();
     BufferedReader reader = new BufferedReader(inputFileReader);
-    
+
     try {
-      reader.readLine(); 
+      reader.readLine();
     } catch (IOException e1) {
       throw new IOException("Error: file cannot be opened or read!");
     }
@@ -29,7 +44,7 @@ public class AirlineReader implements AirlineReaderInterface {
       }
       String newAirport = new String(split[0]);
       boolean check = true;
-      // Can only be one airline 
+      // Can only be one airline
       for (int j = 0; j < airports.size(); j++) {
         if (airports.get(j).equals(newAirport)) {
           check = false;
@@ -42,13 +57,20 @@ public class AirlineReader implements AirlineReaderInterface {
     return airports;
   }
 
+  /**
+   * This method returns an Airline Arraylist of all the airlines in the graph
+   * 
+   * @author Brendan Chang
+   * @param inputFileReader is the file we are reading through (connections.csv)
+   */
   @Override
-  public ArrayList<Airline> getAllAirlines(Reader inputFileReader) throws IOException, DataFormatException{
-    ArrayList<Airline> airlines =  new ArrayList<Airline>();
+  public ArrayList<Airline> getAllAirlines(Reader inputFileReader)
+      throws IOException, DataFormatException {
+    ArrayList<Airline> airlines = new ArrayList<Airline>();
     BufferedReader reader = new BufferedReader(inputFileReader);
-    
+
     try {
-      reader.readLine(); 
+      reader.readLine();
     } catch (IOException e1) {
       throw new IOException("Error: file cannot be opened or read!");
     }
@@ -65,7 +87,7 @@ public class AirlineReader implements AirlineReaderInterface {
       }
       Airline newAirline = new Airline(split[0], split[1], Integer.valueOf(split[2]));
       boolean check = true;
-      // Can only be one airline 
+      // Can only be one airline
       for (int j = 0; j < airlines.size(); j++) {
         if (airlines.get(j).equals(newAirline)) {
           check = false;
