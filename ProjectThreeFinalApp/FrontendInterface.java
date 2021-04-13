@@ -41,7 +41,7 @@ public class FrontendInterface {
 
     try {
       // final Backend movies = new Backend(args);
-      // FileReader read = new FileReader("/Users/jacksoncamp/Downloads/events.csv");
+       FileReader read = new FileReader("/Users/jacksoncamp/Downloads/connections.csv");
       // FileReader read = new FileReader("/Users/kylesung/Downloads/connections.csv");
       final FlightGraph flights = new FlightGraph(args);
       FrontendInterface frontend = new FrontendInterface(flights);
@@ -124,7 +124,7 @@ public class FrontendInterface {
    * @param list   List<Airline> the list of events from a specific category
    * @param airlines FlightGraph airlines is the BackendInterface that was created in the main method
    */
-  public void displayAirlines(List<Airline> list, FlightGraph airlines) {
+  public void displayAirlines(List<String> list, FlightGraph airlines) {
     if (list.isEmpty()) {
       System.out.println("There are no events with this criteria");
       return;
@@ -206,7 +206,7 @@ public class FrontendInterface {
    * @param page     the specific page that we are viewing the airlines for
    * @param numPages the total number of pages in the airlines list
    */
-  public void displayAirlinesHelper(List<Airline> list, FlightGraph airlines, int page,
+  public void displayAirlinesHelper(List<String> list, FlightGraph airlines, int page,
       int numPages) {
 
     int previousEventCount = (page - 1) * 5;
