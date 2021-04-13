@@ -18,7 +18,13 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.io.StringReader;
 
-
+/**
+ * This class tests the FlightGraph.java class and tests the implementation of the addAirport,
+ * removeAirport, addAirline, removeAirline, and getShortestPath
+ * 
+ * @author jacksoncamp
+ *
+ */
 public class BackEndDeveloperTests {
 
   /**
@@ -32,19 +38,19 @@ public class BackEndDeveloperTests {
     StringReader b = new StringReader(input);
     FlightGraph graph = new FlightGraph(a, b);
 
-    //add airport 1
+    // add airport 1
     graph.addAirport("John F. Kennedy International Airport");
     if (!graph.getAirportsList().get(0).equals("John F. Kennedy International Airport")) {
       fail("Failure: Airport 1 not added correctly");
     }
 
-    //add airport 2
+    // add airport 2
     graph.addAirport("O'Hare International Airport");
     if (!graph.getAirportsList().get(1).equals("O'Hare International Airport")) {
       fail("Failure: Airport 2 not added correctly");
     }
 
-    //add airport 3
+    // add airport 3
     graph.addAirport("San Francisco International Airport");
     if (!graph.getAirportsList().get(2).equals("San Francisco International Airport")) {
       fail("Failure: Airport 3 not added correctly");
@@ -63,13 +69,13 @@ public class BackEndDeveloperTests {
     StringReader a = new StringReader(input);
     StringReader b = new StringReader(input);
     FlightGraph graph = new FlightGraph(a, b);
-    
-    //add 3 airports
+
+    // add 3 airports
     graph.addAirport("John F. Kennedy International Airport");
     graph.addAirport("O'Hare International Airport");
     graph.addAirport("San Francisco International Airport");
 
-    //remove airport 1
+    // remove airport 1
     graph.removeAirport("John F. Kennedy International Airport");
     if (!graph.getAirportsList().get(0).equals("O'Hare International Airport")
         || !graph.getAirportsList().get(1).equals("San Francisco International Airport")
@@ -77,14 +83,14 @@ public class BackEndDeveloperTests {
       fail("Failure: Airport 1 not removed correctly");
     }
 
-    //remove airport 2
+    // remove airport 2
     graph.removeAirport("O'Hare International Airport");
     if (!graph.getAirportsList().get(0).equals("San Francisco International Airport")
         || graph.getAirportsList().size() != 1) {
       fail("Failure: Airport 2 not removed correctly");
     }
-    
-    //remove airport 3
+
+    // remove airport 3
     graph.removeAirport("San Francisco International Airport");
     if (graph.getAirportsList().size() != 0) {
       fail("Failure: Airport 3 not removed correctly");
@@ -101,13 +107,13 @@ public class BackEndDeveloperTests {
     StringReader a = new StringReader(input);
     StringReader b = new StringReader(input);
     FlightGraph graph = new FlightGraph(a, b);
-    
-    //add 3 airports
+
+    // add 3 airports
     graph.addAirport("John F. Kennedy International Airport");
     graph.addAirport("O'Hare International Airport");
     graph.addAirport("San Francisco International Airport");
 
-    //add 3 airlines
+    // add 3 airlines
     graph.addAirline("John F. Kennedy International Airport", "O'Hare International Airport", 5);
     graph.addAirline("San Francisco International Airport", "John F. Kennedy International Airport",
         10);
@@ -140,19 +146,19 @@ public class BackEndDeveloperTests {
     StringReader a = new StringReader(input);
     StringReader b = new StringReader(input);
     FlightGraph graph = new FlightGraph(a, b);
-    
-    //add 3 airports
+
+    // add 3 airports
     graph.addAirport("John F. Kennedy International Airport");
     graph.addAirport("O'Hare International Airport");
     graph.addAirport("San Francisco International Airport");
 
-    //add 3 airlines
+    // add 3 airlines
     graph.addAirline("John F. Kennedy International Airport", "O'Hare International Airport", 5);
     graph.addAirline("San Francisco International Airport", "John F. Kennedy International Airport",
         10);
     graph.addAirline("San Francisco International Airport", "O'Hare International Airport", 4);
 
-    //remove airline 1
+    // remove airline 1
     graph.removeAirline("John F. Kennedy International Airport", "O'Hare International Airport");
     if (!graph.getAirlinesList().get(0).equals(
         "San Francisco International Airport --> John F. Kennedy International Airport | Distance: 10")
@@ -165,7 +171,7 @@ public class BackEndDeveloperTests {
       fail("Failure 2: Airline 1 not removed correctly");
     }
 
-    //remove airline 2
+    // remove airline 2
     graph.removeAirline("San Francisco International Airport",
         "John F. Kennedy International Airport");
     if (!graph.getAirlinesList().get(0).equals(
@@ -174,7 +180,7 @@ public class BackEndDeveloperTests {
       fail("Failure 2: Airline 1 not removed correctly");
     }
 
-    //remove airline 3
+    // remove airline 3
     graph.removeAirline("San Francisco International Airport", "O'Hare International Airport");
     if (graph.getAirlinesList().size() != 0) {
       fail("Failure: Airlines not removed correctly");
@@ -240,3 +246,4 @@ public class BackEndDeveloperTests {
 
   }
 }
+
