@@ -53,4 +53,11 @@ public class Airline {
     return this.distance;
 
   }
+  
+  /**
+   * 
+   */
+  public String toString() {
+    return start + " --> " + end + " | Distance: " + distance;
+  }
 }
