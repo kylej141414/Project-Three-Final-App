@@ -1,10 +1,10 @@
 DataWrangler README for Project Three (CS400 @ UW Madison)
 ========================================================
 
-Name of DataWrangler: <enter your complete name here>
-@wisc.edu Email of DataWrangler: <enter your @wisc.edu email address here>
-Group: <enter your two letter group name here>
-Team: <enter your team color: red, blue, or purple, here>
+Name of DataWrangler: Brendan Chang
+@wisc.edu Email of DataWrangler: bchang32@wisc.edu
+Group: JG
+Team: red
 
 Files Written by Me:
 --------------------
