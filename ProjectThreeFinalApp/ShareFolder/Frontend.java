@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -507,14 +508,23 @@ public class FrontendInterface {
       }
     }
     if (validOrigin && validDestination) {
+      try {
       String answer = airlines.getShortestPath(userInput, userInput2);
       System.out.println();
       System.out.println("Calculating...");
       System.out.println(answer);
+      }catch (NoSuchElementException e1){
+        System.out.println();
+        System.out.println("-------------------------------------------------------------------------");
+        System.out.println("ERROR: there is no connection between these two airports, please re-enter");
+        System.out.println("-------------------------------------------------------------------------");
+        System.out.println();
+        calcRouteMode(flights);
+      }
       System.out.println();
     } else {
       System.out.println(
-          "Please re-input the origin and destination airports, current cannot be found in directory");
+          "Please re-input the origin and destination airports, airports cannot be found in directory");
       calcRouteMode(flights);
     }
     System.out.println("Press 'c' to calculate again or 'b' to exit!");
