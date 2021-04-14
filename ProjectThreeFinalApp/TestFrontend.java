@@ -30,12 +30,13 @@ public class TestFrontend {
    */
   @Test
   public void test1() {
- // Runs the front end and redirects its output to a string
+    // Runs the front end and redirects its output to a string
     PrintStream standardOut = System.out;
     InputStream standardIn = System.in;
     try {
-      // set the input stream to our input 
-      String input = "r";
+      // set the input stream to our input
+      String input = "z" + System.lineSeparator() + "1" + System.lineSeparator() + "x"
+          + System.lineSeparator() + "q";
       InputStream inputStreamSimulator = new ByteArrayInputStream(input.getBytes());
       System.setIn(inputStreamSimulator);
       ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
@@ -54,7 +55,7 @@ public class TestFrontend {
       System.setIn(standardIn);
       String appOutput = outputStreamCaptor.toString();
       System.out.println(appOutput);
-      if (!appOutput.contains("Welcome to New Airport Insert Mode!")) {
+      if (!appOutput.contains("Thanks for using the Flight Scheduler!")) {
         // test fails
         fail("Failure: Incorrect output");
       }
