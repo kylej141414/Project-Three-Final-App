@@ -118,10 +118,11 @@ public class FrontendInterface {
 
   /**
    * This method displays the output for a certain list of events. It allows the user to parse
-   * through multiple pages of events if needed
+   * through multiple pages of airlines if needed
    * 
-   * @param list   List<Airline> the list of events from a specific category
-   * @param airlines FlightGraph airlines is the BackendInterface that was created in the main method
+   * @param list     List<Airline> the list of events from a specific category
+   * @param airlines FlightGraph airlines is the BackendInterface that was created in the main
+   *                 method
    */
   public void displayAirlines(List<String> list, FlightGraph airlines) {
     if (list.isEmpty()) {
@@ -154,10 +155,11 @@ public class FrontendInterface {
 
   /**
    * This method displays the output for a certain list of events. It allows the user to parse
-   * through multiple pages of events if needed
+   * through multiple pages of airports if needed
    * 
-   * @param list   List<String> the list of events from a specific category
-   * @param airlines FlightGraph airlines is the BackendInterface that was created in the main method
+   * @param list     List<String> the list of events from a specific category
+   * @param airlines FlightGraph airlines is the BackendInterface that was created in the main
+   *                 method
    */
   public void displayAirports(List<String> list, FlightGraph airlines) {
     if (list.isEmpty()) {
@@ -193,7 +195,8 @@ public class FrontendInterface {
    * the user flipping through multiple pages of airlines
    * 
    * @param list     List<Airlines> the list of Events we are flipping through
-   * @param airlines FlightGraph airlines is the BackendInterface that was created in the main method
+   * @param airlines FlightGraph airlines is the BackendInterface that was created in the main
+   *                 method
    * @param page     the specific page that we are viewing the airlines for
    * @param numPages the total number of pages in the airlines list
    */
@@ -261,11 +264,12 @@ public class FrontendInterface {
   }
 
   /**
-   * This method is a helper method for the displayEvents method. It handles the functionality of
-   * the user flipping through multiple pages of events
+   * This method is a helper method for the displayAirports method. It handles the functionality of
+   * the user flipping through multiple pages of airports
    * 
    * @param list     List<String> the list of airports we are flipping through
-   * @param airports FlightGraph airports is the BackendInterface that was created in the main method
+   * @param airports FlightGraph airports is the BackendInterface that was created in the main
+   *                 method
    * @param page     the specific page that we are viewing the airports for
    * @param numPages the total number of pages in the airports list
    */
@@ -331,7 +335,12 @@ public class FrontendInterface {
     System.out.println(pageNums);
 
   }
-
+  /**
+   * this method is to define the addAirline mode to the program which enables the user to add an
+   * airline or a connection between two airports
+   * 
+   * @param FlightGraph airports
+   */
   public void addAirline(FlightGraph airports) {
     String userInput;
     String userInput2;
@@ -384,7 +393,13 @@ public class FrontendInterface {
       }
     }
   }
-
+  
+  /**
+   * this method is to define the removeAirline mode to the program which enables the user to remove
+   * and airline or connection between two airports
+   * 
+   * @param FlightGraph airports
+   */
   public void removeAirline(FlightGraph airports) {
     String userInput;
     String userInput2;
@@ -433,7 +448,13 @@ public class FrontendInterface {
       }
     }
   }
-
+  
+  /**
+   * this method helps define the newAirportMode which enables the user to add a new airport to the
+   * current airport directory with a specified name
+   * 
+   * @param FlightGraph airports
+   */
   public void newAirportMode(FlightGraph airports) {
     String userInput;
     String userInput2 = "";
@@ -465,6 +486,13 @@ public class FrontendInterface {
     }
   }
 
+  /**
+   * this method is designed to simplify the sorting of airports when displaying them to the user.
+   * Acts as a toString to display the long list of airports in a more comfortable vertical fashion
+   * 
+   * @param FlightGraph airports
+   * @return String toReturn
+   */
   public String showAirports(FlightGraph airports) {
     String toReturn = "";
     for(int i = 0; i < airports.getAirportsList().size(); i++) {
@@ -473,6 +501,12 @@ public class FrontendInterface {
     return toReturn;
   }
   
+  /**
+   * this method is designed to define the calculate mode which enables the user to calculate the
+   * distance between two airports
+   * 
+   * @param FlightGraph airlines
+   */
   public void calcRouteMode(FlightGraph airlines) {
     String userInput;
     String userInput2;
@@ -535,6 +569,12 @@ public class FrontendInterface {
     }
   }
 
+  /**
+   * this method is designed to define the removeAirport mode which enables the user to remove any
+   * airport that is currently defined in the airport directory
+   * 
+   * @param FlightGraph airlines
+   */
   public void removeAirportMode(FlightGraph airlines) {
     String userInput;
     String userInput4 = "";
