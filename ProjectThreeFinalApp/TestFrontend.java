@@ -35,7 +35,7 @@ public class TestFrontend {
     InputStream standardIn = System.in;
     try {
       // set the input stream to our input
-      String input = "z" + System.lineSeparator() + "1" + System.lineSeparator() + "x" + System.lineSeparator() + "q";
+      String input = "a" + System.lineSeparator() + "KLE" + System.lineSeparator() + "no" + System.lineSeparator() + "q";
       InputStream inputStreamSimulator = new ByteArrayInputStream(input.getBytes());
       System.setIn(inputStreamSimulator);
       ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
