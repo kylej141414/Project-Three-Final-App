@@ -123,7 +123,7 @@ public class FrontendInterface {
    * @param list   List<Airline> the list of events from a specific category
    * @param airlines FlightGraph airlines is the BackendInterface that was created in the main method
    */
-  public void displayAirlines(List<Airline> list, FlightGraph airlines) {
+  public void displayAirlines(List<String> list, FlightGraph airlines) {
     if (list.isEmpty()) {
       System.out.println("There are no events with this criteria");
       return;
