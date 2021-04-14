@@ -37,7 +37,7 @@ public class DataWranglerTests {
       AirlineReader readerToTest = new AirlineReader();
       List<Airline> listAirlines =
           readerToTest.getAllAirlines(new StringReader("Airplane 1, Airplane 2, Distance\n"
-              + "A, B, 1\n" + "C, D, 2\n" + "E, F, 3\n" + "G, H, 4\n"));
+              + "A, B,1\n" + "C, D, 2\n" + "E, F, 3\n" + "G, H, 4\n"));
       assertEquals(listAirlines.size(), 4);
     } catch (Exception e) {
       e.printStackTrace();
