@@ -565,6 +565,7 @@ public class FrontendInterface {
     if (validAirport) {
       airlines.removeAirport(userInput);
       System.out.println("Successfully removed the airport " + userInput);
+      baseMenuDisplay();
     } else {
       System.out.println("The airport " + userInput + " could not be found, please re-enter");
       removeAirportMode(flights);
