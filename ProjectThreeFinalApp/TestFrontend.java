@@ -53,7 +53,7 @@ public class TestFrontend {
       // same for standard in
       System.setIn(standardIn);
       String appOutput = outputStreamCaptor.toString();
-      System.out.println(appOutput);
+      //System.out.println(appOutput);
       if (!appOutput.contains("Thanks for using the Flight Scheduler!")) {
         // test fails
         fail("Failure: Incorrect output");
