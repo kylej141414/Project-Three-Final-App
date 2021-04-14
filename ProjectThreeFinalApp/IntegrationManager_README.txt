@@ -18,7 +18,7 @@ Airline.java - Brendan Chang
 AirlineReaderInterface.java - Brendan Chang
 AirlineReader.java - Brendan Chang
 DataWranglerTests.java - Brendan Chang
-CS400Graph.java - Jackson Camp
+CS400Graph.java - Kyle Johnson
 BackEndDeveloperTests.java - Jackson Camp
 BackendInterface.java - Jackson Camp
 FlightGraph.java - Jackson Camp
@@ -27,19 +27,17 @@ FrontendTest.java - Kyle Sung
 
 Instructions to Build, Run and Test your Project:
 -------------------------------------------------
-<Describe here any instructions that will be needed by course staff to build,
- run, and test this project.>
+make command is used to run program and compiles all java programs applicable,
+make test run all three tests for each of the developers,
+make testData tests data wrangler tests
+make testBackend tests backend tests
+make testFrontend tests frontend tests
 
 Team Member Contributions:
 --------------------------
-<List the efforts of any members on your team that went above the team's
- expectations for their contributions to this project.  Also identify any
- ways that team members failed to meet the expectations of the group, for
- example: missed deadlines, lack of communication, lack of effort, etc.>
-
+All of our group went above and beyond to meet a lot at assigned
+times, and figure out bugs and make the program a lot better
 Signature:
 ----------
-<Type out your full name here to certify that to the best of your
- understanding, the contents of this submission represent the efforts of your
- team members. If you are aware of any exceptions to this, please describe them here below your name.>
+Kyle Johnson
  
