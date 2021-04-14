@@ -21,7 +21,7 @@ public class DataWranglerTests {
     try {
       AirlineReader readerToTest = new AirlineReader();
       List<String> listAirports = readerToTest.getAllAirports(new StringReader(
-          "Airplane 1, Airplane 2, Distance\n" + "A, B, 1\n" + "C, D, 2\n" + "E, F, 3\n"));
+          "Airplane 1, Airplane 2, Distance\n" + "A, B,1\n" + "C, D,2\n" + "E, F,3\n"));
       assertEquals(listAirports.size(), 3);
     } catch (Exception e) {
       e.printStackTrace();
@@ -37,7 +37,7 @@ public class DataWranglerTests {
       AirlineReader readerToTest = new AirlineReader();
       List<Airline> listAirlines =
           readerToTest.getAllAirlines(new StringReader("Airplane 1, Airplane 2, Distance\n"
-              + "A, B,1\n" + "C, D, 2\n" + "E, F, 3\n" + "G, H, 4\n"));
+              + "A, B,1\n" + "C, D,2\n" + "E, F,3\n" + "G, H,4\n"));
       assertEquals(listAirlines.size(), 4);
     } catch (Exception e) {
       e.printStackTrace();
@@ -50,7 +50,7 @@ public class DataWranglerTests {
   @Test
   public void testGetStart() {
     try {
-      Airline airlineToTest = new Airline("A", "B", 10);
+      Airline airlineToTest = new Airline("A", "B",10);
       assertEquals(airlineToTest.getStart(), "A");
     } catch (Exception e) {
       e.printStackTrace();
@@ -63,7 +63,7 @@ public class DataWranglerTests {
     @Test
   public void testGetEnd() {
     try {
-      Airline airlineToTest = new Airline("A", "B", 10);
+      Airline airlineToTest = new Airline("A", "B",10);
       assertEquals(airlineToTest.getEnd(), "B");
     } catch (Exception e) {
       e.printStackTrace();
