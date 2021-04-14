@@ -197,7 +197,7 @@ public class FrontendInterface {
    * @param page     the specific page that we are viewing the airlines for
    * @param numPages the total number of pages in the airlines list
    */
-  public void displayAirlinesHelper(List<Airline> list, FlightGraph airlines, int page,
+  public void displayAirlinesHelper(List<String> list, FlightGraph airlines, int page,
       int numPages) {
 
     int previousEventCount = (page - 1) * 5;
